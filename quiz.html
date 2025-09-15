@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فنجان ديسكفري - اكتشف قهوتك</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- شاشة الاختبار -->
+        <div class="screen active" id="quiz-screen">
+            <div class="quiz-form">
+                <h2>أخبرني عن ذوقك</h2>
+                <p>اختر الإجابة المناسبة لكل سؤال</p>
+                
+                <form id="coffee-quiz">
+                    <div class="question-group">
+                        <label> كم تفضل مستوى الحلاوة في مشروبك؟</label>
+                        <div class="options-container">
+                            <button type="button" class="option-btn" data-value="بدون" data-question="sweetness-level">بدون</button>
+                            <button type="button" class="option-btn" data-value="قليل" data-question="sweetness-level">قليل</button>
+                            <button type="button" class="option-btn" data-value="متوسط" data-question="sweetness-level">متوسط</button>
+                            <button type="button" class="option-btn" data-value="حالي" data-question="sweetness-level">حالي</button>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>كم تفضل كمية الحليب في مشروبك؟</label>
+                        <div class="options-container">
+                            <button type="button" class="option-btn" data-value="بدون" data-question="milk-amount">بدون</button>
+                            <button type="button" class="option-btn" data-value="قليل" data-question="milk-amount">قليل</button>
+                            <button type="button" class="option-btn" data-value="متوسط" data-question="milk-amount">متوسط</button>
+                            <button type="button" class="option-btn" data-value="كثير" data-question="milk-amount">كثير</button>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>ما قوة القهوة التي تفضلها؟</label>
+                        <div class="options-container">
+                            <button type="button" class="option-btn" data-value="خفيفة" data-question="coffee-strength">خفيفة</button>
+                            <button type="button" class="option-btn" data-value="متوسطة" data-question="coffee-strength">متوسطة</button>
+                            <button type="button" class="option-btn" data-value="قوية" data-question="coffee-strength">قوية</button>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>هل تحب إضافة نكهات, مثلا (فانيليا، كراميل، شوكولاتة...)؟</label>
+                        <div class="options-container">
+                            <button type="button" class="option-btn" data-value="نعم" data-question="flavors">نعم</button>
+                            <button type="button" class="option-btn" data-value="لا" data-question="flavors">لا</button>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>هل تفضل مشروبك باردًا أم ساخنًا؟</label>
+                        <div class="options-container">
+                            <button type="button" class="option-btn" data-value="بارد" data-question="temperature">بارد</button>
+                            <button type="button" class="option-btn" data-value="ساخن" data-question="temperature">ساخن</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submit-btn" disabled>اكتشف قهوتي</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
