@@ -11,16 +11,31 @@
     <div class="container">
         <!-- شاشة الاختبار -->
         <div class="screen active" id="quiz-screen">
-            <div class="quiz-form">
-                <h2>أخبرني عن ذوقك</h2>
-                <p>اختر الإجابة المناسبة لكل سؤال</p>
-                
-                <form id="coffee-quiz">
+            <form id="coffee-quiz">
+                <!-- مؤشر التقدم الخطي -->
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="current-step">1</span> من <span id="total-steps">6</span>
+                    </div>
+                </div>
+
+                <div class="quiz-form">
+                    <h2>أخبرني عن ذوقك</h2>
+                    <p>اختر الإجابة المناسبة لكل سؤال</p>
+                    <div class="question-group">
+                        <label>هل تريده أن يحتوي مشروبك على القهوة؟</label>
+                        <div class="options-container">
+                            <button type="button" class="option-btn" data-value="نعم" data-question="contains-coffee">نعم</button>
+                            <button type="button" class="option-btn" data-value="لا" data-question="contains-coffee">لا</button>
+                        </div>
+                    </div>
                     <div class="question-group">
                         <label> كم تفضل مستوى الحلاوة في مشروبك؟</label>
                         <div class="options-container">
                             <button type="button" class="option-btn" data-value="بدون" data-question="sweetness-level">بدون</button>
-                            <button type="button" class="option-btn" data-value="قليل" data-question="sweetness-level">قليل</button>
                             <button type="button" class="option-btn" data-value="متوسط" data-question="sweetness-level">متوسط</button>
                             <button type="button" class="option-btn" data-value="حالي" data-question="sweetness-level">حالي</button>
                         </div>
@@ -30,7 +45,6 @@
                         <label>كم تفضل كمية الحليب في مشروبك؟</label>
                         <div class="options-container">
                             <button type="button" class="option-btn" data-value="بدون" data-question="milk-amount">بدون</button>
-                            <button type="button" class="option-btn" data-value="قليل" data-question="milk-amount">قليل</button>
                             <button type="button" class="option-btn" data-value="متوسط" data-question="milk-amount">متوسط</button>
                             <button type="button" class="option-btn" data-value="كثير" data-question="milk-amount">كثير</button>
                         </div>
@@ -61,9 +75,19 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="submit-btn" id="submit-btn" disabled>اكتشف قهوتي</button>
-                </form>
-            </div>
+                </div>
+                <!-- أزرار التنقل بالأسهم -->
+                <div class="simple-nav">
+                    <button type="button" class="nav-btn" id="back-btn" aria-label="السابق">
+                        <span>←</span>
+                    </button>
+                    <button type="button" class="nav-btn primary" id="next-btn" aria-label="التالي">
+                        <span>→</span>
+                    </button>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn" disabled>اكتشف قهوتي</button>
+            </form>
         </div>
     </div>
 

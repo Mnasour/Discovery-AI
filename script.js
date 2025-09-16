@@ -5,46 +5,63 @@ let userAnswers = {};
 
 // ===== دالة عرض النتيجة =====
 function displayRecommendation() {
-    // دائماً نعرض "الموقع تحت الصيانة"
-    const recommendation = {
-        name: 'الموقع تحت الصيانة',
-        description: 'نعتذر، الموقع حالياً تحت الصيانة. سنعود قريباً مع تحديثات جديدة!',
-        emoji: '🔧'
-    };
+    // عرض اقتراحين حقيقيين للقهوة
+    const recommendations = [
+        {
+            name: 'لاتيه كريمي',
+            description: 'مشروب دافئ مع حليب فومي ناعم ونكهة قهوة متوازنة',
+            image: 'images/hot/latte.png'
+        },
+        {
+            name: 'كولد بريو منعش',
+            description: 'قهوة باردة منقوعة طوال الليل مع نكهة قوية ونظيفة',
+            image: 'images/cold/Cold Brew.png'
+        }
+    ];
     
-    // عرض الإيموجي بدلاً من الصورة
+    // إخفاء العناصر القديمة
     const coffeeImage = document.getElementById('coffee-image');
-    if (coffeeImage) {
-        coffeeImage.style.display = 'none'; // إخفاء الصورة
-        
-        // إنشاء عنصر الإيموجي
-        const emojiElement = document.createElement('div');
-        emojiElement.className = 'coffee-emoji';
-        emojiElement.textContent = recommendation.emoji;
-        emojiElement.style.fontSize = '120px';
-        emojiElement.style.margin = '0 auto 30px';
-        emojiElement.style.display = 'block';
-        
-        // إضافة الإيموجي مكان الصورة
-        coffeeImage.parentNode.insertBefore(emojiElement, coffeeImage);
-    }
-    
-    // عرض اسم القهوة
     const coffeeName = document.getElementById('coffee-name');
-    if (coffeeName) {
-        coffeeName.textContent = recommendation.name;
+    const coffeeDescription = document.getElementById('coffee-description');
+    
+    if (coffeeImage) coffeeImage.style.display = 'none';
+    if (coffeeName) coffeeName.style.display = 'none';
+    if (coffeeDescription) coffeeDescription.style.display = 'none';
+    
+    // إنشاء حاوية التوصيات
+    const recommendationContainer = document.querySelector('.recommendation');
+    if (recommendationContainer) {
+        recommendationContainer.innerHTML = '';
+        
+        recommendations.forEach((rec, index) => {
+            const recCard = document.createElement('div');
+            recCard.className = 'recommendation-card';
+            recCard.innerHTML = `
+                <div class="recommendation-image">
+                    <img src="${rec.image}" alt="${rec.name}" />
+                </div>
+                <div class="recommendation-info">
+                    <div class="coffee-name">${rec.name}</div>
+                    <div class="coffee-description">${rec.description}</div>
+                </div>
+            `;
+            recommendationContainer.appendChild(recCard);
+            
+            // إضافة كلمة "أو" بين البطاقتين
+            if (index === 0) {
+                const orElement = document.createElement('div');
+                orElement.className = 'recommendation-or';
+                orElement.textContent = 'أو';
+                recommendationContainer.appendChild(orElement);
+            }
+        });
     }
     
-    // عرض وصف القهوة
-    const coffeeDescription = document.getElementById('coffee-description');
-    if (coffeeDescription) {
-        coffeeDescription.textContent = recommendation.description;
-    }
 }
 
 // ===== دالة تحديث زر الإرسال =====
 function updateSubmitButton() {
-    const allQuestions = ['sweetness-level', 'milk-amount', 'coffee-strength', 'flavors', 'temperature'];
+    const allQuestions = ['contains-coffee', 'sweetness-level', 'milk-amount', 'coffee-strength', 'flavors', 'temperature'];
     const allAnswered = allQuestions.every(question => userAnswers[question]);
     const submitBtn = document.getElementById('submit-btn');
     if (submitBtn) {
@@ -52,25 +69,107 @@ function updateSubmitButton() {
     }
 }
 
-// ===== دالة إعادة تعيين الاختبار =====
-function resetQuiz() {
-    userAnswers = {};
-    const submitBtn = document.getElementById('submit-btn');
-    if (submitBtn) {
-        submitBtn.disabled = true;
-    }
-    
-    // إزالة التحديد من جميع الأزرار
-    document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.classList.remove('selected');
-    });
-}
 
 // ===== إعداد صفحة الاختبار =====
 function setupQuizPage() {
     const optionButtons = document.querySelectorAll('.option-btn');
     const submitButton = document.getElementById('submit-btn');
     const quizForm = document.getElementById('coffee-quiz');
+    const nextBtn = document.getElementById('next-btn');
+    const backBtn = document.getElementById('back-btn');
+    const questionGroups = quizForm ? quizForm.querySelectorAll('.question-group') : [];
+    const quizCard = document.querySelector('.quiz-form');
+    const simpleNav = document.querySelector('.simple-nav');
+    const progressFill = document.getElementById('progress-fill');
+    const currentStepSpan = document.getElementById('current-step');
+    const totalStepsSpan = document.getElementById('total-steps');
+    let currentStep = 0;
+    let startX = 0;
+    let startY = 0;
+
+    function getQuestionKeyForGroup(group) {
+        const firstOption = group.querySelector('.option-btn');
+        return firstOption ? firstOption.getAttribute('data-question') : null;
+    }
+
+    function isCurrentStepAnswered() {
+        const group = questionGroups[currentStep];
+        const key = getQuestionKeyForGroup(group);
+        return key ? Boolean(userAnswers[key]) : true;
+    }
+
+    function updateNavState() {
+        // تحديث أزرار التنقل
+        if (backBtn) {
+            const onFirst = currentStep === 0;
+            backBtn.disabled = onFirst;
+            backBtn.style.display = onFirst ? 'none' : 'flex';
+        }
+        const isLast = currentStep === questionGroups.length - 1;
+        if (nextBtn) {
+            nextBtn.style.display = isLast ? 'none' : 'flex';
+            nextBtn.disabled = !isCurrentStepAnswered();
+        }
+        if (submitButton) {
+            submitButton.style.display = isLast ? 'block' : 'none';
+            updateSubmitButton();
+        }
+        if (simpleNav) {
+            simpleNav.style.display = isLast ? 'none' : 'flex';
+        }
+        
+        // تحديث شريط التقدم والنص
+        if (totalStepsSpan) totalStepsSpan.textContent = questionGroups.length;
+        const percent = ((currentStep) / (questionGroups.length - 1)) * 100;
+        if (progressFill) progressFill.style.width = Math.max(0, Math.min(100, percent)) + '%';
+        if (currentStepSpan) currentStepSpan.textContent = currentStep + 1;
+    }
+
+    function showStep(index) {
+        if (index < 0 || index >= questionGroups.length) return;
+        
+        const currentGroup = questionGroups[currentStep];
+        const nextGroup = questionGroups[index];
+        
+        if (currentGroup && nextGroup && currentStep !== index) {
+            // تأثير انتقال سلس على السؤال فقط
+            currentGroup.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+            currentGroup.style.opacity = '0';
+            currentGroup.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                // إخفاء السؤال الحالي وإظهار الجديد
+                questionGroups.forEach((group, i) => {
+                    group.style.display = i === index ? 'block' : 'none';
+                });
+                
+                // إعداد السؤال الجديد للظهور
+                nextGroup.style.opacity = '0';
+                nextGroup.style.transform = 'translateY(-10px)';
+                
+                // إظهار السؤال الجديد بسلاسة
+                setTimeout(() => {
+                    nextGroup.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    nextGroup.style.opacity = '1';
+                    nextGroup.style.transform = 'translateY(0)';
+                    
+                    // إعادة تعيين الانتقالات
+                    setTimeout(() => {
+                        currentGroup.style.transition = '';
+                        nextGroup.style.transition = '';
+                    }, 300);
+                }, 50);
+            }, 200);
+        } else {
+            // نسخة احتياطية بدون تأثيرات
+            questionGroups.forEach((group, i) => {
+                group.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        currentStep = index;
+        updateNavState();
+    }
     
     optionButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
@@ -95,19 +194,113 @@ function setupQuizPage() {
             }
             
             updateSubmitButton();
+            // تحديث حالة الأزرار فور الاختيار
+            updateNavState();
         });
     });
     
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            if (currentStep < questionGroups.length - 1) {
+                showStep(currentStep + 1);
+            }
+        });
+    }
+
+    if (backBtn) {
+        backBtn.addEventListener('click', function() {
+            if (currentStep > 0) {
+                showStep(currentStep - 1);
+            }
+        });
+    }
+
     if (quizForm) {
         quizForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            if (Object.keys(userAnswers).length === 5) {
+            if (Object.keys(userAnswers).length === 6) {
                 // حفظ الإجابات (رغم أن النتيجة ثابتة)
                 localStorage.setItem('coffeeAnswers', JSON.stringify(userAnswers));
                 // عرض صفحة التحميل
                 showLoadingScreen();
             }
         });
+    }
+
+    // إضافة دعم Swipe
+    if (quizCard) {
+        quizCard.addEventListener('touchstart', handleTouchStart, {passive: true});
+        quizCard.addEventListener('touchend', handleTouchEnd, {passive: true});
+        quizCard.addEventListener('mousedown', handleMouseDown);
+        quizCard.addEventListener('mouseup', handleMouseUp);
+    }
+    
+    function handleTouchStart(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }
+    
+    function handleTouchEnd(e) {
+        if (!startX || !startY) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // التأكد من أن الحركة أفقية أكثر من عمودية
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                // swipe left - التالي
+                if (currentStep < questionGroups.length - 1 && isCurrentStepAnswered()) {
+                    showStep(currentStep + 1);
+                }
+            } else {
+                // swipe right - السابق
+                if (currentStep > 0) {
+                    showStep(currentStep - 1);
+                }
+            }
+        }
+        
+        startX = 0;
+        startY = 0;
+    }
+    
+    function handleMouseDown(e) {
+        startX = e.clientX;
+        startY = e.clientY;
+    }
+    
+    function handleMouseUp(e) {
+        if (!startX || !startY) return;
+        
+        const endX = e.clientX;
+        const endY = e.clientY;
+        
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                if (currentStep < questionGroups.length - 1 && isCurrentStepAnswered()) {
+                    showStep(currentStep + 1);
+                }
+            } else {
+                if (currentStep > 0) {
+                    showStep(currentStep - 1);
+                }
+            }
+        }
+        
+        startX = 0;
+        startY = 0;
+    }
+
+    // إظهار سؤال واحد فقط عند بدء الصفحة
+    if (questionGroups.length > 0) {
+        showStep(0);
     }
 }
 
@@ -175,3 +368,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // صفحة الترحيب لا تحتاج إعدادات خاصة
 });
+
