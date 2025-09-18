@@ -1,55 +1,34 @@
-/**
- * ===== فنجان ديسكفري - اكتشف مشروبك المفضل =====
- * ===== Coffee Discovery - Find Your Perfect Drink =====
- * 
- * نموذج ذكاء اصطناعي لتوصية المشروبات باستخدام خوارزمية KNN
- * AI model for coffee recommendation using KNN algorithm
- * 
- * @author: فريق تطوير فنجان ديسكفري
- * @version: 1.0
- * @date: 2024
- */
 
-// ===== متغيرات عامة =====
+
 let userAnswers = {};
-
-/**
- * ===== نموذج الذكاء الاصطناعي KNN =====
- * ===== Coffee Recommendation AI Model using KNN =====
- */
 class CoffeeRecommendationModel {
-    /**
-     * إنشاء نموذج توصية المشروبات
-     * Initialize coffee recommendation model
-     */
+   
     constructor() {
-        // قاعدة البيانات للمشروبات (فقط المشروبات التي تحتوي على قهوة)
-        // Drinks database (only coffee-based drinks)
         // specialty: 0 = عادي, 1 = يمني, 2 = كولومبي, 3 = إثيوبي
         this.drinksData = [
             // المشروبات الباردة (Cold Drinks - temperature = 0)
-            {name: 'v60 Yemeni coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, flavors: 0, specialty: 1, temperature: 0},
-            {name: 'v60 Ethiopian coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, flavors: 0, specialty: 3, temperature: 0},
-            {name: 'v60 Colombian coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, flavors: 0, specialty: 2, temperature: 0},
-            {name: 'Spanish latte', sweetness: 1, milk_amount: 1, coffee_strength: 1, flavors: 0, specialty: 0, temperature: 0},
-            {name: 'latte', sweetness: 0, milk_amount: 1, coffee_strength: 0, flavors: 0, specialty: 0, temperature: 0},
-            {name: 'Cold Brew', sweetness: 0, milk_amount: 0, coffee_strength: 1, flavors: 0, specialty: 0, temperature: 0},
-            {name: 'coffee day', sweetness: 0, milk_amount: 0, coffee_strength: 0, flavors: 0, specialty: 0, temperature: 0},
-            {name: 'Americano', sweetness: 0, milk_amount: 0, coffee_strength: 0, flavors: 0, specialty: 0, temperature: 0},
+            {name: 'v60 Yemeni coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, specialty: 1, temperature: 0},
+            {name: 'v60 Ethiopian coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, specialty: 3, temperature: 0},
+            {name: 'v60 Colombian coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, specialty: 2, temperature: 0},
+            {name: 'Spanish latte', sweetness: 1, milk_amount: 1, coffee_strength: 1, specialty: 0, temperature: 0},
+            {name: 'latte', sweetness: 0, milk_amount: 1, coffee_strength: 0, specialty: 0, temperature: 0},
+            {name: 'Cold Brew', sweetness: 0, milk_amount: 0, coffee_strength: 1, specialty: 0, temperature: 0},
+            {name: 'coffee day', sweetness: 0, milk_amount: 0, coffee_strength: 0, specialty: 0, temperature: 0},
+            {name: 'Americano', sweetness: 0, milk_amount: 0, coffee_strength: 0, specialty: 0, temperature: 0},
             
             // المشروبات الساخنة (Hot Drinks - temperature = 1)
-            {name: 'v60 Yemeni coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, flavors: 0, specialty: 1, temperature: 1},
-            {name: 'v60 Ethiopian coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, flavors: 0, specialty: 3, temperature: 1},
-            {name: 'v60 Colombian coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, flavors: 0, specialty: 2, temperature: 1},
-            {name: 'Spanish latte', sweetness: 1, milk_amount: 1, coffee_strength: 1, flavors: 0, specialty: 0, temperature: 1},
-            {name: 'Mikato', sweetness: 0, milk_amount: 1, coffee_strength: 1, flavors: 0, specialty: 0, temperature: 1},
-            {name: 'latte', sweetness: 0, milk_amount: 1, coffee_strength: 0, flavors: 0, specialty: 0, temperature: 1},
-            {name: 'Flat white', sweetness: 0, milk_amount: 1, coffee_strength: 0, flavors: 0, specialty: 0, temperature: 1},
-            {name: 'espresso', sweetness: 0, milk_amount: 0, coffee_strength: 1, flavors: 0, specialty: 0, temperature: 1},
-            {name: 'Cortado', sweetness: 0, milk_amount: 1, coffee_strength: 0, flavors: 0, specialty: 0, temperature: 1},
-            {name: 'coffee day', sweetness: 0, milk_amount: 0, coffee_strength: 0, flavors: 0, specialty: 0, temperature: 1},
-            {name: 'cappuccino', sweetness: 0, milk_amount: 1, coffee_strength: 0, flavors: 0, specialty: 0, temperature: 1},
-            {name: 'Americano', sweetness: 0, milk_amount: 0, coffee_strength: 0, flavors: 0, specialty: 0, temperature: 1}
+            {name: 'v60 Yemeni coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, specialty: 1, temperature: 1},
+            {name: 'v60 Ethiopian coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, specialty: 3, temperature: 1},
+            {name: 'v60 Colombian coffee', sweetness: 0, milk_amount: 0, coffee_strength: 1, specialty: 2, temperature: 1},
+            {name: 'Spanish latte', sweetness: 1, milk_amount: 1, coffee_strength: 1, specialty: 0, temperature: 1},
+            {name: 'Mikato', sweetness: 0, milk_amount: 1, coffee_strength: 1, specialty: 0, temperature: 1},
+            {name: 'latte', sweetness: 0, milk_amount: 1, coffee_strength: 0, specialty: 0, temperature: 1},
+            {name: 'Flat white', sweetness: 0, milk_amount: 1, coffee_strength: 0, specialty: 0, temperature: 1},
+            {name: 'espresso', sweetness: 0, milk_amount: 0, coffee_strength: 1, specialty: 0, temperature: 1},
+            {name: 'Cortado', sweetness: 0, milk_amount: 1, coffee_strength: 0, specialty: 0, temperature: 1},
+            {name: 'coffee day', sweetness: 0, milk_amount: 0, coffee_strength: 0, specialty: 0, temperature: 1},
+            {name: 'cappuccino', sweetness: 0, milk_amount: 1, coffee_strength: 0, specialty: 0, temperature: 1},
+            {name: 'Americano', sweetness: 0, milk_amount: 0, coffee_strength: 0, specialty: 0, temperature: 1}
         ];
     }
 
@@ -62,7 +41,7 @@ class CoffeeRecommendationModel {
      */
     calculateDistance(point1, point2) {
         let distance = 0;
-        const features = ['sweetness', 'milk_amount', 'coffee_strength', 'flavors', 'specialty', 'temperature'];
+        const features = ['sweetness', 'milk_amount', 'coffee_strength', 'specialty', 'temperature'];
         
         for (let feature of features) {
             distance += Math.pow(point1[feature] - point2[feature], 2);
@@ -89,7 +68,6 @@ class CoffeeRecommendationModel {
             sweetness: answers['sweetness-level'] === 'نعم' ? 1 : 0,
             milk_amount: answers['milk-amount'] === 'نعم' ? 1 : 0,
             coffee_strength: answers['coffee-strength'] === 'نعم' ? 1 : 0,
-            flavors: answers['flavors'] === 'نعم' ? 1 : 0,
             specialty: specialtyValue,
             temperature: answers['temperature'] === 'نعم' ? 0 : 1  // نعم = بارد = 0، لا = ساخن = 1
         };
@@ -116,7 +94,6 @@ class CoffeeRecommendationModel {
                 sweetness: 2,      // الحلاوة مهمة جداً (Sweetness very important)
                 milk_amount: 3,    // كمية الحليب مهمة جداً جداً (Milk amount very very important)
                 coffee_strength: 2, // قوة القهوة مهمة (Coffee strength important)
-                flavors: 1,        // النكهات أقل أهمية (Flavors less important)
                 specialty: 2,      // القهوة المختصة مهمة (Specialty coffee important)
                 temperature: 2     // الحرارة مهمة (Temperature important)
             };
@@ -138,13 +115,20 @@ class CoffeeRecommendationModel {
         // Sort drinks by weighted distance (closest first)
         distances.sort((a, b) => a.distance - b.distance);
 
-        // أخذ أقرب مشروب واحد فقط (الأكثر تطابقاً)
-        // Take only the closest drink (best match)
-        const bestMatch = distances[0];
+        // تفضيل صريح لشرط الحليب بناءً على اختيار المستخدم
+        // Explicitly prefer milk condition based on user choice
+        let bestMatchEntry = distances[0];
+        if (userPreferences.milk_amount === 1) {
+            const withMilk = distances.find(entry => entry.drink.milk_amount === 1);
+            if (withMilk) bestMatchEntry = withMilk;
+        } else if (userPreferences.milk_amount === 0) {
+            const withoutMilk = distances.find(entry => entry.drink.milk_amount === 0);
+            if (withoutMilk) bestMatchEntry = withoutMilk;
+        }
 
         return {
-            prediction: bestMatch.drink.name,
-            confidence: Math.max(0, 1 - (bestMatch.distance / 10)), // تحويل المسافة إلى ثقة (0-1)
+            prediction: bestMatchEntry.drink.name,
+            confidence: Math.max(0, 1 - (bestMatchEntry.distance / 10)), // تحويل المسافة إلى ثقة (0-1)
             allDistances: distances.slice(0, 5)  // أفضل 5 نتائج (Top 5 results)
         };
     }
@@ -229,14 +213,18 @@ function getDrinkDescription(drinkName, temperature) {
         'latte': `قهوة خفيفة مع حليب فومي ناعم ${tempText}`,
         'cappuccino': `قهوة خفيفة مع حليب ورغوة متوازنة ${tempText}`,
         'Flat white': `قهوة خفيفة مع حليب حريري ناعم ${tempText}`,
-        'Cortado': `قهوة متوسطة مع حليب دافئ متوازن ${tempText}`,
-        'Spanish latte': `قهوة قوية مع حليب محلى ${tempText}`,
-        'Mikato': `قهوة قوية مع لمسة خفيفة من الحليب المبخر ${tempText}`,
+        'Cortado': `إسبرسو ممزوج بكمية مساوية تقريباً من الحليب الساخن المبخر لتقليل حموضة القهوة أو مرارتها
+${tempText}`,
+        'Spanish latte': `مشروب مكون من الإسبريسو والحليب والثلج مضاف إليه محلى`,
+        'Mikato': `اسبريسو مع رغوة الحليب فقط لتقليل  حموضة القهوة أو مرارتها${tempText}`,
         'Cold Brew': 'قهوة باردة منقوعة طوال الليل بدون حليب',
-        'v60 Yemeni coffee': `قهوة مختصة يمنية بطريقة V60 مع نكهة أصيلة مميزة ${tempText}`,
-        'v60 Ethiopian coffee': `قهوة مختصة إثيوبية بطريقة V60 مع نكهة عطرية فريدة ${tempText}`,
-        'v60 Colombian coffee': `قهوة مختصة كولومبية بطريقة V60 مع نكهة ناعمة متوازنة ${tempText}`,
-        'coffee day': `قهوة اليوم خفيفة بدون حليب ${tempText}`
+        'v60 Yemeni coffee': `قهوة فاخرة ذات مذاق معتدل ومتوازن يحتوي على نكهات طبيعية <br>
+الإيحاء . ياسمين . زبيب .فراولة${tempText}`,
+        'v60 Ethiopian coffee': `قهوة فاخرة  ذات مذاق معتدل ومتوازن يحتوي على نكهات طبيعية <br>
+  الإيحاءات :فراولة - توت بري - شوكولاتة`,
+        'v60 Colombian coffee': `قهوة ذات مذاق معتدل وحدة متوسطة ذات مذاق لذيذ ورائع<br>
+ الإيحاءات : توت ازرق – الفراولة${tempText}`,
+        'coffee day': `قهوة سوداء فاخرة ذات سعر مميز مرشحة تجهز مسبقا ويتم تقديمها بانواع قهوة مختلفة يوميا حتى نفاذ الكمية${tempText}`
     };
     
     return descriptions[drinkName] || `مشروب رائع يناسب ذوقك ${tempText}`;
@@ -278,15 +266,6 @@ function displayRecommendation() {
     // Determine recommendation based on answers
     const recommendations = getRecommendations(answers);
     
-    // إخفاء العناصر القديمة
-    // Hide old elements
-    const coffeeImage = document.getElementById('coffee-image');
-    const coffeeName = document.getElementById('coffee-name');
-    const coffeeDescription = document.getElementById('coffee-description');
-    
-    if (coffeeImage) coffeeImage.style.display = 'none';
-    if (coffeeName) coffeeName.style.display = 'none';
-    if (coffeeDescription) coffeeDescription.style.display = 'none';
     
     // إنشاء حاوية التوصيات
     // Create recommendations container
@@ -304,7 +283,9 @@ function displayRecommendation() {
                 </div>
                 <div class="recommendation-info">
                     <div class="coffee-name">${rec.name}</div>
-                    <div class="coffee-description">${rec.description}</div>
+                    <div class="coffee-description">
+                        ${rec.description || ''}
+                    </div>
                 </div>
             `;
             recommendationContainer.appendChild(recCard);
@@ -317,12 +298,11 @@ function displayRecommendation() {
  * ===== Update submit button state =====
  */
 function updateSubmitButton() {
-    const allQuestions = ['sweetness-level', 'milk-amount', 'coffee-strength', 'flavors', 'specialty', 'temperature'];
+    const allQuestions = ['sweetness-level', 'milk-amount', 'coffee-strength', 'specialty', 'temperature'];
     const allAnswered = allQuestions.every(question => userAnswers[question]);
     const submitBtn = document.getElementById('submit-btn');
     if (submitBtn) {
         submitBtn.disabled = !allAnswered;
-        console.log('Submit button state:', { allAnswered, userAnswers }); // Debug log
     }
 }
 
@@ -518,13 +498,14 @@ function setupQuizPage() {
     if (quizForm) {
         quizForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            if (Object.keys(userAnswers).length === 6) {
+            if (Object.keys(userAnswers).length === 5) {
                 // حفظ الإجابات
                 // Save answers
                 localStorage.setItem('coffeeAnswers', JSON.stringify(userAnswers));
                 // عرض صفحة التحميل
                 // Show loading screen
                 showLoadingScreen();
+            } else {
             }
         });
     }
@@ -636,53 +617,9 @@ function setupQuizPage() {
  * ===== Loading screen =====
  */
 function showLoadingScreen() {
-    // إخفاء النموذج
-    // Hide form
-    const quizScreen = document.getElementById('quiz-screen');
-    if (quizScreen) {
-        quizScreen.style.display = 'none';
-    }
-    
-    // إنشاء صفحة التحميل
-    // Create loading screen
-    const container = document.querySelector('.container');
-    const loadingScreen = document.createElement('div');
-    loadingScreen.className = 'loading-screen';
-    loadingScreen.innerHTML = `
-        <div class="loading-content">
-            <div class="loading-spinner">
-                <div class="coffee-cup">☕</div>
-            </div>
-            <h2>نبحث عن مشروبك المفضل...</h2>
-            <p>نشتغل عشان نلاقي أفضل مشروب يناسبك</p>
-            <div class="loading-steps">
-                <div class="step active">نشوف إيش تحب</div>
-                <div class="step">نختار المشروب المناسب</div>
-                <div class="step">نحضر لك التوصية</div>
-            </div>
-        </div>
-    `;
-    
-    container.appendChild(loadingScreen);
-    
-    // محاكاة عملية التحميل
-    // Simulate loading process
-    const steps = loadingScreen.querySelectorAll('.step');
-    let currentStep = 0;
-    
-    const loadingInterval = setInterval(() => {
-        if (currentStep < steps.length) {
-            steps[currentStep].classList.add('active');
-            currentStep++;
-        } else {
-            clearInterval(loadingInterval);
-            // الانتقال لصفحة النتيجة بعد انتهاء التحميل
-            // Navigate to result page after loading
-            setTimeout(() => {
-                window.location.href = 'result.html';
-            }, 1000);
-        }
-    }, 800);
+    // الانتقال إلى صفحة التحميل المخصصة
+    // Navigate to dedicated loading page
+    window.location.href = 'loading.html';
 }
 
 /**
