@@ -322,6 +322,7 @@ function updateSubmitButton() {
     const submitBtn = document.getElementById('submit-btn');
     if (submitBtn) {
         submitBtn.disabled = !allAnswered;
+        console.log('Submit button state:', { allAnswered, userAnswers }); // Debug log
     }
 }
 

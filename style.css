@@ -97,6 +97,8 @@ html, body {
     transition: all 0.3s ease;
     box-shadow: 0 8px 20px rgba(139, 87, 35, 0.3) !important;
     font-family: 'Cairo', sans-serif;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .start-btn:hover, .submit-btn:hover, .action-btn:hover {
@@ -326,11 +328,12 @@ html, body {
 }
 
 .submit-btn:disabled {
-    background: #CCCCCC;
-    color: #666666;
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: none;
+    background: #CCCCCC !important;
+    color: #666666 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+    opacity: 0.6 !important;
 }
 
 /* ===== صفحة النتيجة ===== */
@@ -479,6 +482,16 @@ html, body {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%);
     color: #8B5723;
     border: 2px solid #8B5723;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(139, 87, 35, 0.3);
+    font-family: 'Cairo', sans-serif;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .action-btn.secondary:hover {
@@ -577,9 +590,9 @@ html, body {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.85) 100%);
     color: #8B5723;
     border: 2px solid #8B5723;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(139, 87, 35, 0.2);
     z-index: 1000;
@@ -817,6 +830,14 @@ html, body {
         padding: 12px 30px;
         font-size: 1rem;
         min-width: 180px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .action-btn.secondary {
+        padding: 12px 30px;
+        font-size: 1rem;
+        min-width: 180px;
     }
     
     
@@ -885,9 +906,9 @@ html, body {
     .beta-banner {
         top: 10px;
         right: 10px;
-        padding: 6px 12px;
-        font-size: 0.7rem;
-        border-radius: 18px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        border-radius: 22px;
     }
     
     /* صفحة التحميل للجوالات */
@@ -988,6 +1009,14 @@ html, body {
         padding: 10px 25px;
         font-size: 0.9rem;
         min-width: 160px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .action-btn.secondary {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+        min-width: 160px;
     }
     
     
@@ -1055,9 +1084,9 @@ html, body {
     .beta-banner {
         top: 8px;
         right: 8px;
-        padding: 5px 10px;
-        font-size: 0.65rem;
-        border-radius: 15px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        border-radius: 20px;
     }
     
     /* صفحة التحميل للجوالات الصغيرة */
