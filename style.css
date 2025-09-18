@@ -19,9 +19,6 @@ html, body {
     margin: 0 !important;
     padding: 0 !important;
 }
-
-
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -33,9 +30,6 @@ html, body {
     position: relative;
     box-sizing: border-box;
 }
-
-
-
 .welcome-content-direct {
     text-align: center;
     max-width: 800px;
@@ -113,20 +107,7 @@ html, body {
 
 .start-btn:active {
     transform: translateY(-1px);
-}
-
-.screen {
-    display: none;
-    width: 100%;
-    max-width: 800px;
-}
-
-.screen.active {
-    display: block;
-    animation: fadeInUp 0.6s ease-out;
-}
-
-/* ===== مؤشر التقدم ===== */
+}/* ===== مؤشر التقدم ===== */
 .progress-indicator {
     text-align: center;
     margin-bottom: 20px;
@@ -210,12 +191,9 @@ html, body {
     opacity: 0.3;
     cursor: not-allowed;
     transform: none;
-}
-
-
-.quiz-form, .result-content {
+}.quiz-form, .result-content {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.85) 100%) !important;
-    padding: 50px 40px;
+    padding: 30px 40px;
     border-radius: 25px;
     box-shadow: 0 20px 40px rgba(139, 69, 19, 0.1);
     backdrop-filter: blur(10px);
@@ -246,9 +224,16 @@ html, body {
 .question-group {
     margin-bottom: 35px !important;
     padding-bottom: 25px !important;
+    padding-top: 0 !important;
     transition: all 0.3s ease;
     opacity: 1;
     transform: translateX(0);
+    text-align: center;
+}
+
+.question-group:first-child {
+    padding-top: 120px !important;
+    margin-top: 50px !important;
 }
 
 .question-group:last-child {
@@ -256,12 +241,27 @@ html, body {
     margin-bottom: 20px !important;
 }
 
+.question-group h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #8B5723;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.question-group > p {
+    text-align: center;
+    color: #8B5723;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
 .question-group label {
     display: block;
     font-size: 1rem;
     font-weight: 600;
     color: #8B5723;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     text-align: center;
 }
 
@@ -384,22 +384,19 @@ html, body {
     background-clip: text;
     align-self: center;
     flex-shrink: 0;
-}
-
-
-.recommendation-card {
+}.recommendation-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 250px;
-    width: 250px;
+    max-width: 320px;
+    width: 320px;
     flex-shrink: 0;
 }
 
 .recommendation-image {
-    width: 150px;
-    height: 150px;
+    width: 220px;
+    height: 220px;
     border-radius: 15px;
     background: transparent;
     display: flex;
@@ -418,17 +415,11 @@ html, body {
     height: 100%;
     object-fit: cover;
     border-radius: 11px;
-}
-
-
-.recommendation-info {
+}.recommendation-info {
     width: 100%;
     max-width: 200px;
     margin: 0 auto;
-}
-
-
-.recommendation-info .coffee-name {
+}.recommendation-info .coffee-name {
     font-size: 1.1rem;
     font-weight: 700;
     color: #8B4513;
@@ -445,73 +436,13 @@ html, body {
     text-align: center;
     word-wrap: break-word;
     padding: 0 5px;
-}
-
-
-.recommendation-info .coffee-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #8B4513;
-    margin-bottom: 8px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    word-wrap: break-word;
-}
-
-.recommendation-info .coffee-description {
-    font-size: 0.8rem;
-    color: #A0522D;
-    line-height: 1.3;
-    text-align: center;
-    word-wrap: break-word;
-    padding: 0 5px;
-}
-
-
-.action-buttons {
+}.action-buttons {
     display: flex;
     gap: 15px;
     justify-content: center;
     margin-top: 60px;
     flex-wrap: wrap;
 }
-
-.action-btn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 140px;
-}
-
-.discover-btn {
-    background: linear-gradient(135deg, #8B5723 0%, #A0522D 100%);
-    color: #FFFFFF;
-    box-shadow: 0 4px 15px rgba(139, 87, 35, 0.25);
-}
-
-.discover-btn:hover {
-    background: linear-gradient(135deg, #A0522D 0%, #CD853F 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 87, 35, 0.35);
-}
-
-.back-btn {
-    background: transparent;
-    color: #8B5723;
-    border: 2px solid #8B5723;
-}
-
-.back-btn:hover {
-    background: #8B5723;
-    color: #FFFFFF;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(139, 87, 35, 0.25);
-}
-
 
 .coffee-image {
     width: 200px;
@@ -522,16 +453,7 @@ html, body {
     box-shadow: 0 15px 30px rgba(210, 105, 30, 0.3);
     margin: 0 auto 30px;
     display: block;
-}
-
-.coffee-emoji {
-    font-size: 120px;
-    margin: 0 auto 30px;
-    display: block;
-    animation: bounce 2s infinite;
-}
-
-.coffee-name {
+}.coffee-name {
     font-size: 1.5rem;
     font-weight: 700;
     color: #8B4513;
@@ -553,30 +475,7 @@ html, body {
     gap: 15px;
     align-items: center;
     margin-top: 50px;
-}
-
-.action-btn {
-    background: linear-gradient(135deg, #8B5723 0%, #A0522D 100%);
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 15px rgba(139, 87, 35, 0.3);
-    font-family: 'Cairo', sans-serif;
-    min-width: 180px;
-}
-
-.action-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(139, 87, 35, 0.4);
-    background: linear-gradient(135deg, #A0522D 0%, #CD853F 100%);
-}
-
-.action-btn.secondary {
+}.action-btn.secondary {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%);
     color: #8B5723;
     border: 2px solid #8B5723;
@@ -586,6 +485,88 @@ html, body {
     background: linear-gradient(135deg, rgba(248, 248, 248, 0.9) 0%, rgba(240, 240, 240, 0.8) 100%);
     border-color: #A0522D;
     color: #8B5723;
+}
+
+/* ===== صفحة التحميل ===== */
+.loading-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-in;
+    z-index: 9999;
+}
+
+.loading-content {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.85) 100%) !important;
+    padding: 60px 40px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(139, 69, 19, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(200, 200, 200, 0.3) !important;
+    max-width: 500px;
+    width: 100%;
+}
+
+.loading-spinner {
+    margin-bottom: 30px;
+}
+
+.coffee-cup {
+    font-size: 4rem;
+    animation: coffeeBrew 2s ease-in-out infinite;
+    display: inline-block;
+}
+
+.loading-content h2 {
+    font-size: 1.6rem;
+    color: #8B5723 !important;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.loading-content p {
+    font-size: 1rem;
+    color: #8B5723 !important;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.loading-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.step {
+    padding: 8px 16px;
+    background: rgba(139, 87, 35, 0.1);
+    border-radius: 20px;
+    color: #8B5723 !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.step.active {
+    background: linear-gradient(135deg, #8B5723 0%, #A0522D 100%);
+    color: white !important;
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(139, 87, 35, 0.3);
 }
 
 /* ===== شريط النسخة التجريبية ===== */
@@ -605,9 +586,6 @@ html, body {
     font-family: 'Cairo', sans-serif;
     backdrop-filter: blur(10px);
 }
-
-
-
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -619,8 +597,31 @@ html, body {
     }
 }
 
+@keyframes coffeeBrew {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    50% {
+        transform: scale(1.2) rotate(0deg);
+    }
+    75% {
+        transform: scale(1.1) rotate(-5deg);
+    }
+}
 
-
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 
 
@@ -775,7 +776,6 @@ html, body {
         margin-top: -10px;
     }
     
-    .welcome-screen,
     .quiz-form,
     .result-content {
         padding: 25px 20px;
@@ -812,12 +812,6 @@ html, body {
         gap: 15px;
     }
     
-    .action-btn {
-        width: 100%;
-        max-width: 200px;
-        padding: 10px 25px;
-        font-size: 0.9rem;
-    }
     
     .start-btn, .submit-btn {
         padding: 12px 30px;
@@ -825,9 +819,6 @@ html, body {
         min-width: 180px;
     }
     
-    .coffee-emoji {
-        font-size: 60px;
-    }
     
     .recommendation {
         flex-direction: column;
@@ -841,13 +832,13 @@ html, body {
     }
     
     .recommendation-card {
-        max-width: 250px;
+        max-width: 300px;
         width: 100%;
     }
     
     .recommendation-image {
-        width: 140px;
-        height: 140px;
+        width: 200px;
+        height: 200px;
     }
     
     .recommendation-info .coffee-name {
@@ -862,24 +853,7 @@ html, body {
         border-radius: 7px;
     }
     
-    .recommendation-info .coffee-name {
-        font-size: 1rem;
-    }
     
-    .recommendation-info .coffee-description {
-        font-size: 0.8rem;
-    }
-    
-    .recommendation-actions {
-        margin-top: 25px;
-        gap: 12px;
-    }
-    
-    .action-btn {
-        padding: 10px 20px;
-        font-size: 0.85rem;
-        min-width: 120px;
-    }
     
     .logo-image {
         width: 180px;
@@ -914,6 +888,33 @@ html, body {
         padding: 6px 12px;
         font-size: 0.7rem;
         border-radius: 18px;
+    }
+    
+    /* صفحة التحميل للجوالات */
+    .loading-content {
+        padding: 30px 20px;
+        max-width: 350px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    
+    .loading-content h2 {
+        font-size: 1.4rem;
+    }
+    
+    .loading-content p {
+        font-size: 0.9rem;
+    }
+    
+    .coffee-cup {
+        font-size: 3rem;
+    }
+    
+    .step {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+        min-width: 160px;
     }
 }
 
@@ -954,7 +955,6 @@ html, body {
         margin-top: -15px;
     }
     
-    .welcome-screen,
     .quiz-form,
     .result-content {
         padding: 20px 15px;
@@ -983,11 +983,6 @@ html, body {
         font-size: 0.8rem;
     }
     
-    .action-btn {
-        max-width: 180px;
-        padding: 8px 20px;
-        font-size: 0.85rem;
-    }
     
     .start-btn, .submit-btn {
         padding: 10px 25px;
@@ -995,9 +990,6 @@ html, body {
         min-width: 160px;
     }
     
-    .coffee-emoji {
-        font-size: 50px;
-    }
     
     .recommendation {
         flex-direction: column;
@@ -1011,13 +1003,13 @@ html, body {
     }
     
     .recommendation-card {
-        max-width: 200px;
+        max-width: 260px;
         width: 100%;
     }
     
     .recommendation-image {
-        width: 120px;
-        height: 120px;
+        width: 180px;
+        height: 180px;
     }
     
     .recommendation-info .coffee-name {
@@ -1032,24 +1024,7 @@ html, body {
         border-radius: 6px;
     }
     
-    .recommendation-info .coffee-name {
-        font-size: 0.95rem;
-    }
     
-    .recommendation-info .coffee-description {
-        font-size: 0.75rem;
-    }
-    
-    .recommendation-actions {
-        margin-top: 20px;
-        gap: 10px;
-    }
-    
-    .action-btn {
-        padding: 8px 16px;
-        font-size: 0.8rem;
-        min-width: 100px;
-    }
     
     .logo-image {
         width: 160px;
@@ -1084,68 +1059,8 @@ html, body {
         font-size: 0.65rem;
         border-radius: 15px;
     }
-}
-
-/* ===== صفحة التحميل ===== */
-.loading-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    min-height: 100vh;
-    max-height: 100vh;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    animation: fadeIn 0.5s ease-in;
-}
-
-.loading-content {
-    text-align: center;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.85) 100%) !important;
-    padding: 60px 40px;
-    border-radius: 25px;
-    box-shadow: 0 20px 40px rgba(139, 69, 19, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(200, 200, 200, 0.3) !important;
-    max-width: 500px;
-    width: 100%;
-}
-
-/* تحديث صفحة التحميل للجوالات */
-@media (max-width: 768px) {
-    .loading-content {
-        padding: 30px 20px;
-        max-width: 350px;
-        max-height: calc(100vh - 40px);
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
     
-    .loading-content h2 {
-        font-size: 1.4rem;
-    }
-    
-    .loading-content p {
-        font-size: 0.9rem;
-    }
-    
-    .coffee-cup {
-        font-size: 3rem;
-    }
-    
-    .step {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-        min-width: 160px;
-    }
-}
-
-@media (max-width: 480px) {
+    /* صفحة التحميل للجوالات الصغيرة */
     .loading-content {
         padding: 25px 15px;
         max-width: 320px;
@@ -1170,74 +1085,6 @@ html, body {
         padding: 6px 12px;
         font-size: 0.8rem;
         min-width: 140px;
-    }
-}
-
-.loading-spinner {
-    margin-bottom: 30px;
-}
-
-.coffee-cup {
-    font-size: 4rem;
-    animation: coffeeBrew 2s ease-in-out infinite;
-    display: inline-block;
-}
-
-.loading-content h2 {
-    font-size: 1.6rem;
-    color: #8B5723 !important;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.loading-content p {
-    font-size: 1rem;
-    color: #8B5723 !important;
-    margin-bottom: 30px;
-    opacity: 0.8;
-}
-
-.loading-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-.step {
-    padding: 8px 16px;
-    background: rgba(139, 87, 35, 0.1);
-    border-radius: 20px;
-    color: #8B5723 !important;
-    font-size: 0.9rem;
-    font-weight: 500;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-    min-width: 180px;
-}
-
-.step.active {
-    background: linear-gradient(135deg, #8B5723 0%, #A0522D 100%);
-    color: white !important;
-    opacity: 1;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(139, 87, 35, 0.3);
-}
-
-
-/* ===== الرسوم المتحركة ===== */
-@keyframes coffeeBrew {
-    0%, 100% {
-        transform: scale(1) rotate(0deg);
-    }
-    25% {
-        transform: scale(1.1) rotate(5deg);
-    }
-    50% {
-        transform: scale(1.2) rotate(0deg);
-    }
-    75% {
-        transform: scale(1.1) rotate(-5deg);
     }
 }
 

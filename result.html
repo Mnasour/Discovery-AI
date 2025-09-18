@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- إعدادات الصفحة الأساسية -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فنجان ديسكفري - نتيجة القهوة</title>
+    <title>فنجان ديسكفري - نتيجة المشروب</title>
+    
+    <!-- ملفات التصميم -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- الحاوية الرئيسية -->
     <div class="container">
+        <!-- محتوى صفحة النتيجة -->
         <div class="result-content">
+            <!-- رأس صفحة النتيجة -->
             <div class="result-header">
-                <h2>قهوتك المفضلة</h2>
-                <p>اكتشفنا لك أفضل مشروب يناسب ذوقك</p>
+                <h2>مشروبك المفضل</h2>
+                <p>لقينا لك مشروب رائع يناسبك</p>
             </div>
             
+            <!-- منطقة عرض التوصية -->
             <div class="recommendation" id="recommendation">
-                <img src="" alt="قهوة موصى بها" class="coffee-image" id="coffee-image">
+                <!-- صورة المشروب -->
+                <img src="" alt="مشروب موصى به" class="coffee-image" id="coffee-image">
+                
+                <!-- اسم المشروب -->
                 <div class="coffee-name" id="coffee-name">
-                    <!-- اسم القهوة -->
+                    <!-- سيتم ملؤه بواسطة JavaScript -->
                 </div>
+                
+                <!-- وصف المشروب -->
                 <div class="coffee-description" id="coffee-description">
-                    <!-- وصف القهوة -->
+                    <!-- سيتم ملؤه بواسطة JavaScript -->
                 </div>
             </div>
             
+            <!-- أزرار الإجراءات -->
             <div class="action-buttons">
-                <button class="action-btn secondary" onclick="window.location.href='welcome.html'">العودة للرئيسية</button>
+                <button class="action-btn secondary" onclick="window.location.href='welcome.html'">ارجع للرئيسية</button>
             </div>
         </div>
     </div>
 
+    <!-- ملف JavaScript الرئيسي -->
     <script src="script.js"></script>
 </body>
 </html>

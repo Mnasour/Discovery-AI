@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- إعدادات الصفحة الأساسية -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فنجان ديسكفري - اكتشف قهوتك</title>
+    <title>فنجان ديسكفري - اكتشف مشروبك</title>
+    
+    <!-- ملفات التصميم -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- الحاوية الرئيسية -->
     <div class="container">
         <!-- شاشة الاختبار -->
         <div class="screen active" id="quiz-screen">
+            <!-- نموذج الاختبار -->
             <form id="coffee-quiz">
                 <!-- مؤشر التقدم الخطي -->
                 <div class="progress-indicator">
@@ -22,45 +27,38 @@
                     </div>
                 </div>
 
+                <!-- محتوى الاختبار -->
                 <div class="quiz-form">
-                    <h2>أخبرني عن ذوقك</h2>
-                    <p>اختر الإجابة المناسبة لكل سؤال</p>
+                    <!-- العنوان الرئيسي -->
+                    <h2>قولنا عن ذوقك</h2>
+                    <p>اختار الإجابة اللي تناسبك لكل سؤال</p>
+                    
                     <div class="question-group">
-                        <label>هل تريده أن يحتوي مشروبك على القهوة؟</label>
+                        <label>تبي مشروب حلو ولا مر؟</label>
                         <div class="options-container">
-                            <button type="button" class="option-btn" data-value="نعم" data-question="contains-coffee">نعم</button>
-                            <button type="button" class="option-btn" data-value="لا" data-question="contains-coffee">لا</button>
-                        </div>
-                    </div>
-                    <div class="question-group">
-                        <label> كم تفضل مستوى الحلاوة في مشروبك؟</label>
-                        <div class="options-container">
-                            <button type="button" class="option-btn" data-value="بدون" data-question="sweetness-level">بدون</button>
-                            <button type="button" class="option-btn" data-value="متوسط" data-question="sweetness-level">متوسط</button>
-                            <button type="button" class="option-btn" data-value="حالي" data-question="sweetness-level">حالي</button>
+                            <button type="button" class="option-btn" data-value="نعم" data-question="sweetness-level">حلو</button>
+                            <button type="button" class="option-btn" data-value="لا" data-question="sweetness-level">مر</button>
                         </div>
                     </div>
 
                     <div class="question-group">
-                        <label>كم تفضل كمية الحليب في مشروبك؟</label>
+                        <label>تبي حليب في مشروبك ولا بدون حليب؟</label>
                         <div class="options-container">
-                            <button type="button" class="option-btn" data-value="بدون" data-question="milk-amount">بدون</button>
-                            <button type="button" class="option-btn" data-value="متوسط" data-question="milk-amount">متوسط</button>
-                            <button type="button" class="option-btn" data-value="كثير" data-question="milk-amount">كثير</button>
+                            <button type="button" class="option-btn" data-value="نعم" data-question="milk-amount">فيه حليب</button>
+                            <button type="button" class="option-btn" data-value="لا" data-question="milk-amount">بدون حليب</button>
                         </div>
                     </div>
 
                     <div class="question-group">
-                        <label>ما قوة القهوة التي تفضلها؟</label>
+                        <label>تبي قهوة قوية ولا خفيفة؟</label>
                         <div class="options-container">
-                            <button type="button" class="option-btn" data-value="خفيفة" data-question="coffee-strength">خفيفة</button>
-                            <button type="button" class="option-btn" data-value="متوسطة" data-question="coffee-strength">متوسطة</button>
-                            <button type="button" class="option-btn" data-value="قوية" data-question="coffee-strength">قوية</button>
+                            <button type="button" class="option-btn" data-value="نعم" data-question="coffee-strength">قوية</button>
+                            <button type="button" class="option-btn" data-value="لا" data-question="coffee-strength">خفيفة</button>
                         </div>
                     </div>
 
                     <div class="question-group">
-                        <label>هل تحب إضافة نكهات, مثلا (فانيليا، كراميل، شوكولاتة...)؟</label>
+                        <label>تبي نكهات زي فانيليا أو شوكولاتة وغيرها؟</label>
                         <div class="options-container">
                             <button type="button" class="option-btn" data-value="نعم" data-question="flavors">نعم</button>
                             <button type="button" class="option-btn" data-value="لا" data-question="flavors">لا</button>
@@ -68,10 +66,20 @@
                     </div>
 
                     <div class="question-group">
-                        <label>هل تفضل مشروبك باردًا أم ساخنًا؟</label>
+                        <label>تبي قهوتك تكون مختصة أو أي نوع عادي؟</label>
                         <div class="options-container">
-                            <button type="button" class="option-btn" data-value="بارد" data-question="temperature">بارد</button>
-                            <button type="button" class="option-btn" data-value="ساخن" data-question="temperature">ساخن</button>
+                            <button type="button" class="option-btn" data-value="يمني" data-question="specialty">مختصة - بن يمني</button>
+                            <button type="button" class="option-btn" data-value="كولومبي" data-question="specialty">مختصة - بن كولومبي</button>
+                            <button type="button" class="option-btn" data-value="إثيوبي" data-question="specialty">مختصة - بن إثيوبي</button>
+                            <button type="button" class="option-btn" data-value="عادي" data-question="specialty">عادي</button>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>تبي مشروب بارد ولا ساخن؟</label>
+                        <div class="options-container">
+                            <button type="button" class="option-btn" data-value="نعم" data-question="temperature">بارد</button>
+                            <button type="button" class="option-btn" data-value="لا" data-question="temperature">ساخن</button>
                         </div>
                     </div>
 
@@ -86,7 +94,7 @@
                     </button>
                 </div>
 
-                <button type="submit" class="submit-btn" id="submit-btn" disabled>اكتشف قهوتي</button>
+                <button type="submit" class="submit-btn" id="submit-btn" disabled>اكتشف مشروبك</button>
             </form>
         </div>
     </div>
