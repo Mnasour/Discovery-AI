@@ -208,26 +208,22 @@ function getDrinkDescription(drinkName, temperature) {
     const tempText = isCold ? 'بارد' : 'ساخن';
     
     const descriptions = {
-        'espresso': `قهوة مركزة وقوية بدون حليب ${tempText}`,
-        'Americano': `قهوة خفيفة مع ماء ساخن بدون حليب ${tempText}`,
-        'latte': `قهوة خفيفة مع حليب فومي ناعم ${tempText}`,
-        'cappuccino': `قهوة خفيفة مع حليب ورغوة متوازنة ${tempText}`,
-        'Flat white': `قهوة خفيفة مع حليب حريري ناعم ${tempText}`,
-        'Cortado': `إسبرسو ممزوج بكمية مساوية تقريباً من الحليب الساخن المبخر لتقليل حموضة القهوة أو مرارتها
-${tempText}`,
-        'Spanish latte': `مشروب مكون من الإسبريسو والحليب والثلج مضاف إليه محلى`,
-        'Mikato': `اسبريسو مع رغوة الحليب فقط لتقليل  حموضة القهوة أو مرارتها${tempText}`,
+        'espresso': 'قهوة مركزة وقوية بدون حليب',
+        'Americano': 'قهوة خفيفة مع ماء ساخن بدون حليب',
+        'latte': 'قهوة خفيفة مع حليب فومي ناعم',
+        'cappuccino': 'قهوة خفيفة مع حليب ورغوة متوازنة',
+        'Flat white': 'قهوة خفيفة مع حليب حريري ناعم',
+        'Cortado': 'إسبرسو ممزوج بكمية مساوية تقريباً من الحليب الساخن المبخر لتقليل حموضة القهوة أو مرارتها',
+        'Spanish latte': 'مشروب مكون من الإسبريسو والحليب والثلج مضاف إليه محلى',
+        'Mikato': 'اسبريسو مع رغوة الحليب فقط لتقليل حموضة القهوة أو مرارتها',
         'Cold Brew': 'قهوة باردة منقوعة طوال الليل بدون حليب',
-        'v60 Yemeni coffee': `قهوة فاخرة ذات مذاق معتدل ومتوازن يحتوي على نكهات طبيعية <br>
-الإيحاء . ياسمين . زبيب .فراولة${tempText}`,
-        'v60 Ethiopian coffee': `قهوة فاخرة  ذات مذاق معتدل ومتوازن يحتوي على نكهات طبيعية <br>
-  الإيحاءات :فراولة - توت بري - شوكولاتة`,
-        'v60 Colombian coffee': `قهوة ذات مذاق معتدل وحدة متوسطة ذات مذاق لذيذ ورائع<br>
- الإيحاءات : توت ازرق – الفراولة${tempText}`,
-        'coffee day': `قهوة سوداء فاخرة ذات سعر مميز مرشحة تجهز مسبقا ويتم تقديمها بانواع قهوة مختلفة يوميا حتى نفاذ الكمية${tempText}`
+        'v60 Yemeni coffee': `قهوة فاخرة ذات مذاق معتدل ومتوازن تحوي إيحاءات طبيعية من الياسمين والزبيب والفراولة`,
+        'v60 Ethiopian coffee': `قهوة فاخرة ذات مذاق معتدل ومتوازن تحوي إيحاءات طبيعية من الفراولة والتوت البري والشوكولاتة`,
+        'v60 Colombian coffee': `قهوة ذات مذاق معتدل وحدة متوسطة تحوي إيحاءات طبيعية من التوت الأزرق والفراولة`,
+        'coffee day': 'قهوة سوداء فاخرة ذات سعر مميز مرشحة تجهز مسبقاً ويتم تقديمها بأنواع قهوة مختلفة يومياً حتى نفاذ الكمية'
     };
     
-    return descriptions[drinkName] || `مشروب رائع يناسب ذوقك ${tempText}`;
+    return descriptions[drinkName] || 'مشروب رائع يناسب ذوقك';
 }
 
 /**
@@ -382,6 +378,32 @@ function setupQuizPage() {
     }
 
     /**
+     * إعادة تعيين حالة الأزرار للسؤال الحالي
+     * Reset button states for current question
+     */
+    function resetCurrentQuestionButtons() {
+        const currentGroup = questionGroups[currentStep];
+        if (!currentGroup) return;
+        
+        const key = getQuestionKeyForGroup(currentGroup);
+        if (!key) return;
+        
+        // إزالة التحديد من جميع أزرار السؤال الحالي
+        const currentButtons = currentGroup.querySelectorAll('.option-btn');
+        currentButtons.forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        
+        // إعادة تطبيق التحديد إذا كان هناك إجابة محفوظة
+        if (userAnswers[key]) {
+            const selectedButton = currentGroup.querySelector(`.option-btn[data-value="${userAnswers[key]}"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('selected');
+            }
+        }
+    }
+
+    /**
      * إظهار خطوة معينة
      * Show specific step
      * @param {number} index - فهرس الخطوة (Step index)
@@ -436,6 +458,7 @@ function setupQuizPage() {
 
         currentStep = index;
         updateNavState();
+        resetCurrentQuestionButtons();
     }
     
     // إضافة مستمعي الأحداث للأزرار
@@ -609,6 +632,7 @@ function setupQuizPage() {
     // Show only one question when page loads
     if (questionGroups.length > 0) {
         showStep(0);
+        resetCurrentQuestionButtons();
     }
 }
 

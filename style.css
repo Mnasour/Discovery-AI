@@ -245,15 +245,15 @@ body.welcome, body.welcome html {
 }
 
 .quiz .option-btn:hover {
-    background: rgba(255, 255, 255, 1) !important;
-    border-color: rgba(255, 255, 255, 1) !important;
-    transform: translateY(-2px) scale(1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
-    opacity: 1;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    opacity: 0.8;
 }
 
 .quiz .option-btn:active {
-    transform: translateY(0) scale(0.98);
+    transform: none;
 }
 
 .quiz .option-btn.selected {
@@ -267,27 +267,30 @@ body.welcome, body.welcome html {
 
 /* Glass Button for navigation arrows - same as welcome page */
 .quiz .nav-btn {
-    width: 50px !important;
-    height: 50px !important;
+    width: 45px !important;
+    height: 45px !important;
     border-radius: 50% !important;
-    border: 1px solid rgba(255, 255, 255, 0.8) !important;
-    background: rgba(255, 255, 255, 0.9) !important;
+    border: none !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%) !important;
     color: #000000 !important;
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
 }
 
 .quiz .nav-btn:hover {
-    background: rgba(255, 255, 255, 1) !important;
-    border-color: rgba(255, 255, 255, 1) !important;
-    transform: scale(1.08);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%) !important;
+    color: #000000 !important;
+    transform: none;
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
 .quiz .nav-btn:disabled {
@@ -354,21 +357,21 @@ body.welcome, body.welcome html {
     height: 8px;
     width: 100%;
     max-width: 600px;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     margin: 0 auto 8px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .progress-fill {
     height: 100%;
     width: 0%;
-    background: #000000;
+    background: #FFFFFF;
     border-radius: 8px;
     transition: width 0.35s ease;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
 
 .progress-text {
@@ -400,34 +403,62 @@ body.welcome, body.welcome html {
         width: 45px;
         height: 45px;
         border-radius: 50%;
-        border: 2px solid rgba(255, 255, 255, 0.8);
-        background: rgba(255, 255, 255, 0.3);
+        border: none;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
         color: #000000 !important;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         font-weight: 700;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(20px);
+        position: relative;
+        overflow: hidden;
     }
 
 /* ضمان وضوح لون السهم داخل الزر */
 .nav-btn span {
-    color: #000000 !important;
+    color: inherit !important;
     font-weight: 700;
     line-height: 1;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+/* تأثير الإضاءة الداخلية */
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.nav-btn:hover::before {
+    width: 100%;
+    height: 100%;
 }
 
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.5);
-    border-color: rgba(255, 255, 255, 1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
     color: #000000 !important;
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: none;
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:active {
+    transform: none;
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn:disabled {
@@ -523,10 +554,10 @@ body.welcome, body.welcome html {
 }
 
 .option-btn:hover {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-color: rgba(255, 255, 255, 0.7) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .option-btn.selected {
@@ -780,7 +811,7 @@ body.result .container::before {
 .progress-bar {
     width: 400px;
     height: 12px;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 6px;
     margin: 0 auto 12px;
     overflow: hidden;
@@ -799,8 +830,8 @@ body.result .container::before {
 .progress-text {
     font-size: 18px;
     font-weight: 600;
-    color: #000000 !important;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    color: #FFFFFF !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* ===== Sand Timer Loader ===== */
@@ -1089,15 +1120,15 @@ body.result .container::before {
     
     /* إزالة اللون البني من الشاشات المتوسطة */
     .progress-bar {
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.3);
         height: 5px;
         max-width: 350px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .progress-fill {
-        background: #000000;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        background: #FFFFFF;
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
     }
     html, body {
         height: auto !important;
@@ -1162,15 +1193,15 @@ body.result .container::before {
     
     /* إزالة اللون البني من الشاشات الكبيرة */
     .progress-bar {
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.3);
         height: 4px;
         max-width: 400px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .progress-fill {
-        background: #000000;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        background: #FFFFFF;
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
     }
     html, body {
         height: auto !important;
@@ -1240,14 +1271,15 @@ body.result .container::before {
         max-width: 320px;
         margin: 0 auto 6px;
         border-radius: 6px;
-        background: rgba(0, 0, 0, 0.3);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
+    
     .progress-fill {
         border-radius: 6px;
-        background: #000000;
-        box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+        background: #FFFFFF;
+        box-shadow: 0 0 3px rgba(255, 255, 255, 0.6);
     }
     .progress-text {
         font-size: 0.8rem;
@@ -1278,7 +1310,7 @@ body.result .container::before {
     
     .quiz-form,
     .result-content {
-        padding: 25px 20px;
+        padding: 25px 20px 100px 20px;
         max-height: none;
         overflow: visible;
         margin: 0;
@@ -1328,7 +1360,15 @@ body.result .container::before {
         align-items: center;
         gap: 6px;
         justify-content: center;
-        margin-top: 70px;
+        margin-top: 0;
+        margin-bottom: 20px;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        padding: 0 20px;
+        z-index: 1000;
     }
     
     
@@ -1359,28 +1399,33 @@ body.result .container::before {
     }
     
     .recommendation-card {
-        max-width: 300px;
+        max-width: 380px;
         width: 100%;
     }
     
     .recommendation-image {
-        width: 200px;
-        height: 200px;
+        width: 250px !important;
+        height: 250px !important;
+        border-radius: 20px !important;
+        box-shadow: none !important;
+        border: 2px solid rgba(255, 255, 255, 0.8) !important;
+        margin: 0 auto 10px auto !important;
+        display: block !important;
     }
     
     .recommendation-info .coffee-name {
-        font-size: 1rem;
+        font-size: 1.2rem !important;
     }
     
     .recommendation-info .coffee-description {
-        font-size: 0.95rem;
+        font-size: 1.4rem;
         font-weight: 500;
         text-align: center;
         max-width: 350px;
     }
     
     .recommendation-image img {
-        border-radius: 7px;
+        border-radius: 18px !important;
     }
     
     
@@ -1457,14 +1502,14 @@ body.result .container::before {
         max-width: 260px;
         margin: 0 auto 5px;
         border-radius: 4px;
-        background: rgba(0, 0, 0, 0.3);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .progress-fill {
         border-radius: 4px;
-        background: #000000;
-        box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+        background: #FFFFFF;
+        box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
     }
     .progress-text {
         font-size: 0.75rem;
@@ -1791,14 +1836,14 @@ body.quiz .quiz-form .option-btn {
 }
 
 body.quiz .quiz-form .option-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
-    background: linear-gradient(135deg, #7B3F0A 0%, #8B4513 100%);
+    transform: none;
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
 }
 
 body.quiz .quiz-form .option-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(139, 69, 19, 0.3);
+    transform: none;
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
 }
 
 body.quiz .simple-nav { 
@@ -1879,22 +1924,24 @@ body.quiz .submit-btn:active {
 
 /* ضبط أزرار التنقل في صفحة الاختبار لتكون زجاجية */
 body.quiz .simple-nav .nav-btn {
-    border: 2px solid rgba(255, 255, 255, 0.8) !important;
-    background: rgba(255, 255, 255, 0.3) !important;
+    border: none !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%) !important;
     color: #000000 !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
     font-size: 1.4rem !important;
     font-weight: 700 !important;
     width: 45px !important;
     height: 45px !important;
+    border-radius: 50% !important;
+    position: relative;
+    overflow: hidden;
 }
 body.quiz .simple-nav .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.5) !important;
-    border-color: rgba(255, 255, 255, 1) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%) !important;
     color: #000000 !important;
-    transform: scale(1.05) !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+    transform: none !important;
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* إزالة الظلال والخلفيات من أسئلة صفحة الاختبار */
